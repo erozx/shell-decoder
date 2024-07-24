@@ -185,7 +185,7 @@ $funcsK = preg_replace_callback(
     $funcsK
 );
 
-$funcsK = rotManyTime($funcsK, rand(5, 15));
+$funcsK = rotManyTime($funcsK, 15);
 
 $keyFile = 'encodedKeys.csv';
 $stringToEncrypt = file_get_contents('input.txt');
@@ -196,7 +196,7 @@ $template = str_replace('function_keys', $funcsK, $template);
 $template = str_replace('function_vals', $funcsV, $template);
 $template = str_replace('keys_arr', $keysArr, $template);
 $template = str_replace('keys_val', $keysVal, $template);
-$template = str_replace('preg_replace', rotManyTime("preg_replace_callback", rand(5, 15)), $template);
+$template = str_replace('preg_replace', rotManyTime("preg_replace_callback", 15), $template);
 $template = str_replace('many_space', spaceManyTime(200), $template);
 
 
